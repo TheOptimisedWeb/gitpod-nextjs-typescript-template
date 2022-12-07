@@ -22,7 +22,7 @@ export default function Home({ variable }: HomePageProps) {
         </h1>
 
         <p className={styles.description}>
-          Your viewing the app running of the <strong>Main</strong> branch
+          Your viewing the app running of the <strong>showoff-branch</strong> branch!!
         </p>
 
         {variable && (
