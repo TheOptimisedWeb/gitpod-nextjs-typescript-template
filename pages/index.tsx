@@ -17,8 +17,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          Your viewing the app running of the <strong>Main</strong> branch
         </p>
 
         <div className={styles.grid}>
