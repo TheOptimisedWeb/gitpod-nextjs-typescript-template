@@ -1,6 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+
+const CUSTOM_ENV_VAR = process.env.CUSTOM_URL_ENV_VAR;
 
 export default function Home() {
   return (
@@ -19,6 +21,8 @@ export default function Home() {
         <p className={styles.description}>
           Your viewing the app running of the <strong>Main</strong> branch
         </p>
+
+        {CUSTOM_ENV_VAR && <h3>You passed a url environment variable: {CUSTOM_ENV_VAR}</h3>}
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -59,12 +63,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
