@@ -1,10 +1,13 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-const CUSTOM_ENV_VAR = process.env.CUSTOM_URL_ENV_VAR;
+type HomePageProps = {
+  variable: string | null;
+};
 
-export default function Home() {
+export default function Home({ variable }: HomePageProps) {
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +25,11 @@ export default function Home() {
           Your viewing the app running of the <strong>Main</strong> branch
         </p>
 
-        {CUSTOM_ENV_VAR && <h3>You passed a url environment variable: {CUSTOM_ENV_VAR}</h3>}
+        {variable && (
+          <h3>
+            You passed a url environment variable: <strong>{variable}</strong>
+          </h3>
+        )}
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -72,3 +79,18 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async (
+  context
+) => {
+  // Variables without the prefix `NEXT_PUBLIC_` aren't available at run time in the client side
+  // https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
+  const CUSTOM_ENV_VAR = process.env.CUSTOM_URL_ENV_VAR;
+
+  return {
+    props: {
+      // Pass through variable from build.
+      variable: CUSTOM_ENV_VAR || null,
+    },
+  };
+};
